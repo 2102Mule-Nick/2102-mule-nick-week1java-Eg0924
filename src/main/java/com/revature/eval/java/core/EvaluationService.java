@@ -31,7 +31,18 @@ public class EvaluationService {
 	 */
 	public String acronym(String phrase) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		
+		char dash = '-';
+		String acro ="";
+		
+		acro+=phrase.charAt(0);
+		
+		for(int i =1; i<phrase.length(); i++) {
+			if(Character.isWhitespace(phrase.charAt(i))|| phrase.charAt(i)==dash) {
+				acro += phrase.charAt(i+1);
+			}
+		}
+		return acro.toUpperCase();
 	}
 
 	/**
