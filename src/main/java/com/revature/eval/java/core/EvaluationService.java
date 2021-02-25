@@ -1,6 +1,7 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -144,9 +145,46 @@ public class EvaluationService {
 	 */
 	public int getScrabbleScore(String string) {
 		// TODO Write an implementation for this method declaration
+
+    	
+		Map<Character, Integer> alphabet = new HashMap<Character, Integer>();
+        alphabet.put('A', 1);
+        alphabet.put('E', 1);
+        alphabet.put('I', 1);
+        alphabet.put('O', 1);
+        alphabet.put('U', 1);
+        alphabet.put('L', 1);
+        alphabet.put('N', 1);
+        alphabet.put('R', 1);
+        alphabet.put('S', 1);
+        alphabet.put('T', 1);
+        alphabet.put('G', 2);
+        alphabet.put('D', 2);
+        alphabet.put('B', 3);
+        alphabet.put('C', 3);
+        alphabet.put('M', 3);
+        alphabet.put('P', 3);
+        alphabet.put('F', 4);
+        alphabet.put('H', 4);
+        alphabet.put('V', 4);
+        alphabet.put('W', 4);
+        alphabet.put('Y', 4);
+        alphabet.put('K', 5);
+        alphabet.put('J', 8);
+        alphabet.put('X', 8);
+        alphabet.put('Q', 10);
+        alphabet.put('Z', 10);
+        
+        
+		string = string.toUpperCase();
 		
+        Integer sum = 0;
+        for(int i = 0; i <string.length();i++) {
+            //look up the current char in the alphabet and add it's value to sum
+            sum = sum + alphabet.get(string.charAt(i));
+        }
 		
-		return 0;
+		return sum;
 	}
 
 	/**
