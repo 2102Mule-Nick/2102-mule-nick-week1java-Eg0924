@@ -4,6 +4,8 @@ import java.time.temporal.Temporal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class EvaluationService {
 
@@ -16,12 +18,12 @@ public class EvaluationService {
 	 */
 	public String reverse(String string) {
 		char[] reversed = new char[string.length()];
-		for (int i = reversed.length - 1, j=0; i >= 0; i--, j++) {
+		for (int i = reversed.length - 1, j = 0; i >= 0; i--, j++) {
 			reversed[j] = string.charAt(i);
 		}
 		return new String(reversed);
 	}
-	
+
 	/**
 	 * 2. Convert a phrase to its acronym. Techies love their TLA (Three Letter
 	 * Acronyms)! Help generate some jargon by writing a program that converts a
@@ -32,15 +34,15 @@ public class EvaluationService {
 	 */
 	public String acronym(String phrase) {
 		// TODO Write an implementation for this method declaration
-		
+
 		char dash = '-';
-		String acro ="";
-		
-		acro+=phrase.charAt(0);
-		
-		for(int i =1; i<phrase.length(); i++) {
-			if(Character.isWhitespace(phrase.charAt(i))|| phrase.charAt(i)==dash) {
-				acro += phrase.charAt(i+1);
+		String acro = "";
+
+		acro += phrase.charAt(0);
+
+		for (int i = 1; i < phrase.length(); i++) {
+			if (Character.isWhitespace(phrase.charAt(i)) || phrase.charAt(i) == dash) {
+				acro += phrase.charAt(i + 1);
 			}
 		}
 		return acro.toUpperCase();
@@ -97,31 +99,28 @@ public class EvaluationService {
 
 		public boolean isEquilateral() {
 			// TODO Write an implementation for this method declaration
-			 if(sideOne == sideTwo && sideTwo == sideThree) {
-				 return true;
-			 }
-			else {
-				 
-			return false;
-			 }
+			if (sideOne == sideTwo && sideTwo == sideThree) {
+				return true;
+			} else {
+
+				return false;
+			}
 		}
 
 		public boolean isIsosceles() {
 			// TODO Write an implementation for this method declaration
-			if(sideOne == sideTwo || sideTwo == sideThree || sideOne==sideThree) {
+			if (sideOne == sideTwo || sideTwo == sideThree || sideOne == sideThree) {
 				return true;
-			}
-			else {
+			} else {
 				return false;
 			}
 		}
 
 		public boolean isScalene() {
 			// TODO Write an implementation for this method declaration
-			if(sideOne != sideTwo && sideOne != sideThree) {
+			if (sideOne != sideTwo && sideOne != sideThree) {
 				return true;
-			}
-			else {
+			} else {
 				return false;
 			}
 		}
@@ -146,44 +145,42 @@ public class EvaluationService {
 	public int getScrabbleScore(String string) {
 		// TODO Write an implementation for this method declaration
 
-    	
 		Map<Character, Integer> alphabet = new HashMap<Character, Integer>();
-        alphabet.put('A', 1);
-        alphabet.put('E', 1);
-        alphabet.put('I', 1);
-        alphabet.put('O', 1);
-        alphabet.put('U', 1);
-        alphabet.put('L', 1);
-        alphabet.put('N', 1);
-        alphabet.put('R', 1);
-        alphabet.put('S', 1);
-        alphabet.put('T', 1);
-        alphabet.put('G', 2);
-        alphabet.put('D', 2);
-        alphabet.put('B', 3);
-        alphabet.put('C', 3);
-        alphabet.put('M', 3);
-        alphabet.put('P', 3);
-        alphabet.put('F', 4);
-        alphabet.put('H', 4);
-        alphabet.put('V', 4);
-        alphabet.put('W', 4);
-        alphabet.put('Y', 4);
-        alphabet.put('K', 5);
-        alphabet.put('J', 8);
-        alphabet.put('X', 8);
-        alphabet.put('Q', 10);
-        alphabet.put('Z', 10);
-        
-        
+		alphabet.put('A', 1);
+		alphabet.put('E', 1);
+		alphabet.put('I', 1);
+		alphabet.put('O', 1);
+		alphabet.put('U', 1);
+		alphabet.put('L', 1);
+		alphabet.put('N', 1);
+		alphabet.put('R', 1);
+		alphabet.put('S', 1);
+		alphabet.put('T', 1);
+		alphabet.put('G', 2);
+		alphabet.put('D', 2);
+		alphabet.put('B', 3);
+		alphabet.put('C', 3);
+		alphabet.put('M', 3);
+		alphabet.put('P', 3);
+		alphabet.put('F', 4);
+		alphabet.put('H', 4);
+		alphabet.put('V', 4);
+		alphabet.put('W', 4);
+		alphabet.put('Y', 4);
+		alphabet.put('K', 5);
+		alphabet.put('J', 8);
+		alphabet.put('X', 8);
+		alphabet.put('Q', 10);
+		alphabet.put('Z', 10);
+
 		string = string.toUpperCase();
-		
-        Integer sum = 0;
-        for(int i = 0; i <string.length();i++) {
-            //look up the current char in the alphabet and add it's value to sum
-            sum = sum + alphabet.get(string.charAt(i));
-        }
-		
+
+		Integer sum = 0;
+		for (int i = 0; i < string.length(); i++) {
+			// look up the current char in the alphabet and add it's value to sum
+			sum = sum + alphabet.get(string.charAt(i));
+		}
+
 		return sum;
 	}
 
@@ -220,8 +217,25 @@ public class EvaluationService {
 	 */
 	public String cleanPhoneNumber(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		String cleanNumber = string.replaceAll("[-.()\\W\s]" ,"");
+
+		
+
+		String p = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
+
+		Pattern pat = Pattern.compile(p);
+
+		Matcher mat = pat.matcher(cleanNumber);
+
+		if (mat.matches()) {
+			System.out.println(mat.replaceFirst("$1$2$3"));
+		}
+
+		return cleanNumber;
+	
+		
 	}
+	
 
 	/**
 	 * 6. Given a phrase, count the occurrences of each word in that phrase.
