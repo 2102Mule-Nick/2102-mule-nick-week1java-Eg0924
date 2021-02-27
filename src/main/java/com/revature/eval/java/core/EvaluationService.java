@@ -218,21 +218,37 @@ public class EvaluationService {
 	public String cleanPhoneNumber(String string) {
 		// TODO Write an implementation for this method declaration
 		String cleanNumber = string.replaceAll("[-.()\\W\s]" ,"");
-
+		boolean specialChar;
 		
-
+		if(cleanNumber.length() > 11) {
+			throw new IllegalArgumentException();		
+		}
+		
+		Pattern nonChar = Pattern.compile("[^0-9]");
+		
+		Matcher special = nonChar.matcher(cleanNumber);
+		
+		specialChar = special.find();
+		
+		if(specialChar) {
+			throw new IllegalArgumentException();
+		}
+		else {
+		
 		String p = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
 
 		Pattern pat = Pattern.compile(p);
 
 		Matcher mat = pat.matcher(cleanNumber);
-
+		
 		if (mat.matches()) {
 			System.out.println(mat.replaceFirst("$1$2$3"));
+		
 		}
-
+		}
 		return cleanNumber;
 	
+		
 		
 	}
 	
